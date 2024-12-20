@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { extractId } from "../utils/getIdBySlug";
 import { useGetDogQuery } from "../store/service/dog.service";
-import { Box, Typography } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import LoadingData from "../components/Loading/LoadingData";
+import CustomText from "../components/CustomText";
 
 const DetailsDog = () => {
   const param = useParams();
@@ -12,64 +13,20 @@ const DetailsDog = () => {
   if (isLoading) {
     return <LoadingData />;
   }
+  console.log(data)
   return (
     <div>
-      <Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Name
-          </Typography>
-          <Typography>{data?.data?.attributes?.name}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={850}>
-            Description
-          </Typography>
-          <Typography>{data?.data?.attributes?.description}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Hypoallergenic
-          </Typography>
-          <Typography>{data?.data?.attributes?.hypoallergenic}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Female_weight ( Min )
-          </Typography>
-          <Typography>{data?.data?.attributes?.female_weight.min}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Female_weight ( Max )
-          </Typography>
-          <Typography>{data?.data?.attributes?.female_weight.max}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Male_weight ( Min )
-          </Typography>
-          <Typography>{data?.data?.attributes?.male_weight.min}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Male_weight ( Max )
-          </Typography>
-          <Typography>{data?.data?.attributes?.male_weight.max}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Life: ( Min )
-          </Typography>
-          <Typography>{data?.data?.attributes?.life.min}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6" marginRight={5} width={300}>
-            Life: ( Max )
-          </Typography>
-          <Typography>{data?.data?.attributes?.life.max}</Typography>
-        </Box>
-      </Box>
+      <Grid2 container paddingX={20} paddingTop={5} spacing={2}>
+        <CustomText name="Name" info={data?.data?.attributes?.name}/>
+        <CustomText name="Description" info={data?.data?.attributes?.description}/>
+        <CustomText name="Hypoallergenic" info={data?.data?.attributes?.hypoallergenic}/>
+        <CustomText name="Female_weight ( Min )" info={data?.data?.attributes?.female_weight.min}/>
+        <CustomText name="Female_weight ( Max )" info={data?.data?.attributes?.female_weight.max}/>
+        <CustomText name="Male_weight ( Min )" info={data?.data?.attributes?.male_weight.min}/>
+        <CustomText name="Male_weight ( Max )" info={data?.data?.attributes?.male_weight.max}/>
+        <CustomText name="Life ( Min )" info={data?.data?.attributes?.life.min}/>
+        <CustomText name="Life ( Max )" info={data?.data?.attributes?.life.max}/>
+      </Grid2>
     </div>
   );
 };
