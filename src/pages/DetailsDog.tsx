@@ -10,20 +10,65 @@ const DetailsDog = () => {
 
   const { data, isLoading } = useGetDogQuery(dogId);
   if (isLoading) {
-    return <LoadingData/>;
+    return <LoadingData />;
   }
   return (
     <div>
       <Box>
-        <Typography>{data?.data?.attributes?.name}</Typography>
-        <Typography>{data?.data?.attributes?.description}</Typography>
-        <Typography>{data?.data?.attributes?.hypoallergenic}</Typography>
-        <Typography>{data?.data?.attributes?.female_weight.min}</Typography>
-        <Typography>{data?.data?.attributes?.female_weight.max}</Typography>
-        <Typography>{data?.data?.attributes?.male_weight.min}</Typography>
-        <Typography>{data?.data?.attributes?.male_weight.max}</Typography>
-        <Typography>{data?.data?.attributes?.life.min}</Typography>
-        <Typography>{data?.data?.attributes?.life.max}</Typography>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Name
+          </Typography>
+          <Typography>{data?.data?.attributes?.name}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={850}>
+            Description
+          </Typography>
+          <Typography>{data?.data?.attributes?.description}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Hypoallergenic
+          </Typography>
+          <Typography>{data?.data?.attributes?.hypoallergenic}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Female_weight ( Min )
+          </Typography>
+          <Typography>{data?.data?.attributes?.female_weight.min}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Female_weight ( Max )
+          </Typography>
+          <Typography>{data?.data?.attributes?.female_weight.max}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Male_weight ( Min )
+          </Typography>
+          <Typography>{data?.data?.attributes?.male_weight.min}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Male_weight ( Max )
+          </Typography>
+          <Typography>{data?.data?.attributes?.male_weight.max}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Life: ( Min )
+          </Typography>
+          <Typography>{data?.data?.attributes?.life.min}</Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" marginRight={5} width={300}>
+            Life: ( Max )
+          </Typography>
+          <Typography>{data?.data?.attributes?.life.max}</Typography>
+        </Box>
       </Box>
     </div>
   );

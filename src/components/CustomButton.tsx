@@ -29,11 +29,11 @@ const CustomButton = ({ name, type, onClick, disabled = false, icon }: IButton) 
         "&:hover": {
           backgroundColor: "#FFA21A",
           opacity: 0.8,
-          cursor: !disabled ? "pointer" : "not-allowed"
         },
         "&.Mui-disabled": {
           backgroundColor: "#E0E0E0",
           color: "#A0A0A0",
+          cursor: "not-allowed",
         },
       }}
       startIcon={icon}

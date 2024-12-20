@@ -25,11 +25,13 @@ import LoadingButton from "../components/Loading/LoadingButton";
 const HomePage = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
-  const [loading, setLoading] = useState(false);
   const { data, isLoading, error } = useGetDogsQuery();
+  const [loadingStates, setLoadingStates] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   if (isLoading) {
-    return <LoadingData/>;
+    return <LoadingData />;
   }
 
   if (error) {
@@ -41,11 +43,15 @@ const HomePage = () => {
   }
 
   const handleDetailProduct = (name: string, id: string) => {
-    setLoading(true)
+    setLoadingStates((prevState) => ({ ...prevState, [id]: true })); // Set loading state for specific item
+
     setTimeout(() => setProgress(30), 500);
     setTimeout(() => setProgress(80), 1000);
     setTimeout(() => setProgress(100), 1500);
-    setTimeout(() => navigate(`/${handleSlug(name) + "_" + id}`), 3000);
+    setTimeout(() => {
+      navigate(`/${handleSlug(name) + "_" + id}`);
+      setLoadingStates((prevState) => ({ ...prevState, [id]: false })); // Reset loading state after navigation
+    }, 3000);
   };
 
   return (
@@ -66,10 +72,18 @@ const HomePage = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center"><b>ID</b></TableCell>
-              <TableCell align="center"><b>Name</b></TableCell>
-              <TableCell align="center"><b>Description</b></TableCell>
-              <TableCell align="center"><b>Actions</b></TableCell>
+              <TableCell align="center">
+                <b>ID</b>
+              </TableCell>
+              <TableCell align="center">
+                <b>Name</b>
+              </TableCell>
+              <TableCell align="center">
+                <b>Description</b>
+              </TableCell>
+              <TableCell align="center">
+                <b>Actions</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -91,14 +105,19 @@ const HomePage = () => {
                 >
                   {item.attributes.description}
                 </TableCell>
-                <TableCell
-                  align="right"
-                >
+                <TableCell align="right">
                   <CustomButton
-                    name={loading ? <LoadingButton/> : "Xem chi tiết"}
+                    name={
+                      loadingStates[item.id] ? (
+                        <LoadingButton />
+                      ) : (
+                        "Xem chi tiết"
+                      )
+                    }
                     onClick={() =>
                       handleDetailProduct(item.attributes.name, item.id)
                     }
+                    disabled={loadingStates[item.id]}
                   />
                 </TableCell>
               </TableRow>
