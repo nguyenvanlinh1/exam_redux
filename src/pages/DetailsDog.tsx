@@ -4,16 +4,29 @@ import { useGetDogQuery } from "../store/service/dog.service";
 import { Grid2 } from "@mui/material";
 import LoadingData from "../components/Loading/LoadingData";
 import CustomText from "../components/CustomText";
+import { isErrorWithMessage, isFetchBaseQueryError } from "../configs/TypeError";
+import PageError from "../components/Error/PageError";
+import { toast } from "react-toastify";
 
 const DetailsDog = () => {
   const param = useParams();
   const dogId = extractId(param?.slugbyname);
+  
 
-  const { data, isLoading } = useGetDogQuery(dogId);
+  const { data, isLoading, error } = useGetDogQuery(dogId);
+  console.log(error);
+  
   if (isLoading) {
     return <LoadingData />;
   }
-  console.log(data)
+  if(error){
+    if(isFetchBaseQueryError(error)){
+      return <PageError status={error.status}/>
+    }
+    else if(isErrorWithMessage(error)){
+      return toast.error(error.message)
+    }
+  }
   return (
     <div>
       <Grid2 container paddingX={20} paddingTop={5} spacing={2}>

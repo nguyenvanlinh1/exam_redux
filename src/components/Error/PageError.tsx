@@ -22,10 +22,10 @@ const PageError = (props: IPageError) => {
       minHeight="100vh"
       bgcolor="#f5f5f5"
     >
-      <Typography variant="h1" color="primary" gutterBottom>
+      <Typography variant="h3" color="red" gutterBottom>
         {status}
       </Typography>
-      <Typography variant="h5" color="textSecondary" gutterBottom>
+      <Typography variant="h5" color="black">
         {HTTP_CODE[status as keyof typeof HTTP_CODE]
           ? HTTP_CODE[status as keyof typeof HTTP_CODE]
           : "Lỗi không xác định"}

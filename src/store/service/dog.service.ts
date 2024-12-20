@@ -36,7 +36,11 @@ type DetailDogResponse = { data: Dog, link: Link };
 export const dogApi = createApi({
     reducerPath: "dogApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://dogapi.dog/api/v2"
+        baseUrl: "https://dogapi.dog/api/v2",
+        prepareHeaders(headers, ) {
+            headers.set("Content-Type", "application/json")
+            return headers;
+        },
     }),
     tagTypes: ["Dog"],
     endpoints: (build) => ({
