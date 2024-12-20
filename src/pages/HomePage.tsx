@@ -105,7 +105,7 @@ const HomePage = () => {
                 >
                   {item.attributes.description}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="right" width={150}>
                   <CustomButton
                     name={
                       loadingStates[item.id] ? (

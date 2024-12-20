@@ -18,6 +18,7 @@ interface IButton {
 const CustomButton = ({ name, type, onClick, disabled = false, icon }: IButton) => {
   return (
     <Button
+      fullWidth
       variant="contained"
       onClick={onClick}
       disabled={disabled}

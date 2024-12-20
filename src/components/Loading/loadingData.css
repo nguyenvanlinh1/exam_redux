@@ -8,10 +8,10 @@
 
 .spinner {
   font-size: 50px;
-  animation: spin 1s linear infinite;
+  animation: spinLoadingData 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes spinLoadingData {
   0% {
     transform: rotate(0deg);
   }
@@ -24,20 +24,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px; /* Chiều rộng của container */
-  height: 50px; /* Chiều cao của container */
-  border-radius: 50%; /* Làm cho phần tử thành hình tròn */
-  background-color: #007bff; /* Màu nền của container */
-  color: white; /* Màu sắc của biểu tượng */
-  font-size: 24px; /* Kích thước của biểu tượng */
-  animation: spin 1s linear infinite; /* Hiệu ứng quay */
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  animation: spinLoadingButton 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes spinLoadingButton {
   0% {
-    transform: rotate(0deg); /* Bắt đầu quay từ 0 độ */
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg); /* Quay hoàn toàn một vòng */
+    transform: rotate(360deg);
   }
 }
