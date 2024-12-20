@@ -1,0 +1,43 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.spinner {
+  font-size: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Chiều rộng của container */
+  height: 50px; /* Chiều cao của container */
+  border-radius: 50%; /* Làm cho phần tử thành hình tròn */
+  background-color: #007bff; /* Màu nền của container */
+  color: white; /* Màu sắc của biểu tượng */
+  font-size: 24px; /* Kích thước của biểu tượng */
+  animation: spin 1s linear infinite; /* Hiệu ứng quay */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); /* Bắt đầu quay từ 0 độ */
+  }
+  100% {
+    transform: rotate(360deg); /* Quay hoàn toàn một vòng */
+  }
+}
