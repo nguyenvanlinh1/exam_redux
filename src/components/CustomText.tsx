@@ -11,7 +11,7 @@ const CustomText = ({ name, info }: IText) => {
       <Grid2 size={3}>
         <b>{name}</b>
       </Grid2>
-      <Grid2 size={9}>{info.toString()}</Grid2>
+      <Grid2 size={9}>{info?.toString()}</Grid2>
     </>
   );
 };

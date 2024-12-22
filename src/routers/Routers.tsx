@@ -1,20 +1,25 @@
-import { Route, Routes } from "react-router-dom"
-import HomePage from "../pages/HomePage"
-import DetailsDog from "../pages/DetailsDog"
-import PageError from "../components/Error/PageError"
+import { Route, Routes } from "react-router-dom";
+import PageError from "../components/Error/PageError";
+import React, { Suspense } from "react";
+import LoadingData from "../components/Loading/LoadingData";
 
-const NOTFOUND = 404
+const HomePage = React.lazy(() => import("../pages/HomePage"));
+const DetailsDog = React.lazy(() => import("../pages/DetailsDog"))
+
+const NOTFOUND = 404;
 
 const Routers = () => {
   return (
     <div>
+      <Suspense fallback={<LoadingData/>}>
         <Routes>
-            <Route path="" element={<HomePage/>}></Route>
-            <Route path="/:slugbyname" element={<DetailsDog/>}></Route>
-            <Route path="*" element={<PageError status={NOTFOUND}/>}></Route>
+          <Route path="" element={<HomePage />}></Route>
+          <Route path="/:slugbyname" element={<DetailsDog />}></Route>
+          <Route path="*" element={<PageError status={NOTFOUND} />}></Route>
         </Routes>
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default Routers
+export default Routers;

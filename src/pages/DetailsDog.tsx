@@ -14,7 +14,6 @@ const DetailsDog = () => {
   
 
   const { data, isLoading, error } = useGetDogQuery(dogId);
-  console.log(error);
   
   if (isLoading) {
     return <LoadingData />;

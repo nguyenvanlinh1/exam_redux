@@ -19,7 +19,6 @@ import {
 } from "../configs/TypeError";
 import PageError from "../components/Error/PageError";
 import { toast } from "react-toastify";
-import LoadingData from "../components/Loading/LoadingData";
 import LoadingButton from "../components/Loading/LoadingButton";
 
 const HomePage = () => {
@@ -30,9 +29,9 @@ const HomePage = () => {
     [key: string]: boolean;
   }>({});
 
-  if (isLoading) {
-    return <LoadingData />;
-  }
+  // if (isLoading) {
+  //   return <LoadingData />;
+  // }
 
   if (error) {
     if (isFetchBaseQueryError(error)) {
@@ -43,14 +42,14 @@ const HomePage = () => {
   }
 
   const handleDetailProduct = (name: string, id: string) => {
-    setLoadingStates((prevState) => ({ ...prevState, [id]: true })); // Set loading state for specific item
+    setLoadingStates((prevState) => ({ ...prevState, [id]: true }));
 
     setTimeout(() => setProgress(30), 500);
     setTimeout(() => setProgress(80), 1000);
     setTimeout(() => setProgress(100), 1500);
     setTimeout(() => {
       navigate(`/${handleSlug(name) + "_" + id}`);
-      setLoadingStates((prevState) => ({ ...prevState, [id]: false })); // Reset loading state after navigation
+      setLoadingStates((prevState) => ({ ...prevState, [id]: false }));
     }, 3000);
   };
 
