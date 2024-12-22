@@ -3,7 +3,7 @@ import LoadingBar from 'react-top-loading-bar'
 interface ILoadingPage {
   progress: number;
   setProgress: (() => void) | undefined
-  delay: number
+  delay?: number
 }
 
 export const LoadingPage = ({progress, delay, setProgress} : ILoadingPage) => {

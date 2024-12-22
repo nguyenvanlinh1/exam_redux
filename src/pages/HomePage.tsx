@@ -23,10 +23,23 @@ import {
   LoadingPage,
   PageError,
 } from "../components";
+import {
+  DEFAULT_PAGE,
+  DEFAULT_PROGRESS,
+  PROGRESS_COMPLETE,
+  PROGRESS_MID,
+  PROGRESS_START,
+  ROW_PER_PAGE_END,
+  ROW_PER_PAGE_MID,
+  ROW_PER_PAGE_START,
+  TIME_TO_COMPLETE,
+  TIME_TO_MID,
+  TIME_TO_START,
+} from "../constant/constant";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(DEFAULT_PROGRESS);
   const { data, error } = useGetDogsQuery();
   const [loadingStates, setLoadingStates] = useState<{
     [key: string]: boolean;
@@ -47,20 +60,20 @@ const HomePage = () => {
   const handleDetailProduct = (name: string, id: string) => {
     setLoadingStates((prevState) => ({ ...prevState, [id]: true }));
 
-    setTimeout(() => setProgress(30), 500);
-    setTimeout(() => setProgress(80), 1000);
-    setTimeout(() => setProgress(100), 1500);
+    setTimeout(() => setProgress(PROGRESS_START), TIME_TO_START);
+    setTimeout(() => setProgress(PROGRESS_MID), TIME_TO_MID);
+    setTimeout(() => setProgress(PROGRESS_COMPLETE), TIME_TO_COMPLETE);
     setTimeout(() => {
       navigate(`/${handleSlug(name) + "_" + id}`);
       setLoadingStates((prevState) => ({ ...prevState, [id]: false }));
-    }, 3000);
+    }, TIME_TO_START + TIME_TO_MID + TIME_TO_COMPLETE);
   };
 
   // so trang
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(DEFAULT_PAGE);
 
   // so phan tu tren 1 trang
-  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [rowsPerPage, setRowsPerPage] = useState(ROW_PER_PAGE_START);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -70,7 +83,7 @@ const HomePage = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(+event.target.value);
-    setPage(0);
+    setPage(DEFAULT_PAGE);
   };
 
   return (
@@ -84,8 +97,7 @@ const HomePage = () => {
     >
       <LoadingPage
         progress={progress}
-        setProgress={() => setProgress(0)}
-        delay={2000}
+        setProgress={() => setProgress(DEFAULT_PROGRESS)}
       />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -152,14 +164,18 @@ const HomePage = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[4, 6, 10]}
+        rowsPerPageOptions={[
+          ROW_PER_PAGE_START,
+          ROW_PER_PAGE_MID,
+          ROW_PER_PAGE_END,
+        ]}
         component="div"
-        count={data?.data.length ?? 0}
+        count={data?.data.length ?? DEFAULT_PAGE}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        sx={{display:"flex", justifyContent:"center"}}
+        sx={{ display: "flex", justifyContent: "center" }}
         labelRowsPerPage="Số hàng mỗi trang:"
       />
     </div>
