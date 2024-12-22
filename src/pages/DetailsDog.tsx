@@ -2,11 +2,9 @@ import { useParams } from "react-router-dom";
 import { extractId } from "../utils/getIdBySlug";
 import { useGetDogQuery } from "../store/service/dog.service";
 import { Grid2 } from "@mui/material";
-import LoadingData from "../components/Loading/LoadingData";
-import CustomText from "../components/CustomText";
 import { isErrorWithMessage, isFetchBaseQueryError } from "../configs/TypeError";
-import PageError from "../components/Error/PageError";
 import { toast } from "react-toastify";
+import { CustomText, LoadingData, PageError } from "../components";
 
 const DetailsDog = () => {
   const param = useParams();

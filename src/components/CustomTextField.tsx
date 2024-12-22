@@ -10,7 +10,7 @@ interface ITextField {
   errorMessage?: string;
 }
 
-const CustomTextField = ({
+export const CustomTextField = ({
   title,
   name,
   value,
@@ -41,5 +41,3 @@ const CustomTextField = ({
     </Box>
   );
 };
-
-export default CustomTextField;

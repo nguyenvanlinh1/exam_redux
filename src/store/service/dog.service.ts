@@ -32,12 +32,20 @@ interface Link {
 type DogResponse = { data: Dog[], link: Link };
 type DetailDogResponse = { data: Dog, link: Link };
 
+interface ListResponse<T> {
+    page: number
+    per_page: number
+    total: number
+    total_pages: number
+    data: T[]
+}
+
 
 export const dogApi = createApi({
     reducerPath: "dogApi",
     baseQuery: fetchBaseQuery({
         baseUrl: "https://dogapi.dog/api/v2",
-        prepareHeaders(headers, ) {
+        prepareHeaders(headers,) {
             headers.set("Content-Type", "application/json")
             return headers;
         },

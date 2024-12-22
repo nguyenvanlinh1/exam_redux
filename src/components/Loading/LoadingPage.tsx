@@ -6,7 +6,7 @@ interface ILoadingPage {
   delay: number
 }
 
-const LoadingPage = ({progress, delay, setProgress} : ILoadingPage) => {
+export const LoadingPage = ({progress, delay, setProgress} : ILoadingPage) => {
   return (
     <div>
       <LoadingBar
@@ -20,5 +20,3 @@ const LoadingPage = ({progress, delay, setProgress} : ILoadingPage) => {
     </div>
   );
 };
-
-export default LoadingPage;

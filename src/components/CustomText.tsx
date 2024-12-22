@@ -5,7 +5,7 @@ interface IText {
   info: any;
 }
 
-const CustomText = ({ name, info }: IText) => {
+export const CustomText = ({ name, info }: IText) => {
   return (
     <>
       <Grid2 size={3}>
@@ -15,5 +15,3 @@ const CustomText = ({ name, info }: IText) => {
     </>
   );
 };
-
-export default CustomText;

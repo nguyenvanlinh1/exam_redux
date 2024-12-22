@@ -15,7 +15,7 @@ interface IButton {
   icon?: ReactNode;
 }
 
-const CustomButton = ({ name, type, onClick, disabled = false, icon }: IButton) => {
+export const CustomButton = ({ name, type, onClick, disabled = false, icon }: IButton) => {
   return (
     <Button
       fullWidth
@@ -44,4 +44,4 @@ const CustomButton = ({ name, type, onClick, disabled = false, icon }: IButton) 
   );
 };
 
-export default CustomButton;
+// export default CustomButton;

@@ -5,21 +5,24 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
 } from "@mui/material";
 import { useGetDogsQuery } from "../store/service/dog.service";
-import CustomButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { handleSlug } from "../utils/slug";
-import LoadingPage from "../components/Loading/LoadingPage";
 import { useState } from "react";
 import {
   isErrorWithMessage,
   isFetchBaseQueryError,
 } from "../configs/TypeError";
-import PageError from "../components/Error/PageError";
 import { toast } from "react-toastify";
-import LoadingButton from "../components/Loading/LoadingButton";
+import {
+  CustomButton,
+  LoadingButton,
+  LoadingPage,
+  PageError,
+} from "../components";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -32,6 +35,7 @@ const HomePage = () => {
   // if (isLoading) {
   //   return <LoadingData />;
   // }
+  console.log(data);
 
   if (error) {
     if (isFetchBaseQueryError(error)) {
@@ -53,6 +57,23 @@ const HomePage = () => {
     }, 3000);
   };
 
+  // so trang
+  const [page, setPage] = useState(0);
+
+  // so phan tu tren 1 trang
+  const [rowsPerPage, setRowsPerPage] = useState(4);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
     <div
       style={{
@@ -72,7 +93,7 @@ const HomePage = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center">
-                <b>ID</b>
+                <b>Số thứ tự</b>
               </TableCell>
               <TableCell align="center">
                 <b>Name</b>
@@ -86,44 +107,62 @@ const HomePage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.data?.map((item) => (
-              <TableRow
-                key={item.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {item.id}
-                </TableCell>
-                <TableCell align="justify">{item.attributes.name}</TableCell>
-                <TableCell
-                  align="justify"
-                  sx={{
-                    textOverflow: "hidden",
-                    overflow: "hidden",
-                  }}
+            {data?.data
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((item, index) => (
+                <TableRow
+                  key={item.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  {item.attributes.description}
-                </TableCell>
-                <TableCell align="right" width={150}>
-                  <CustomButton
-                    name={
-                      loadingStates[item.id] ? (
-                        <LoadingButton />
-                      ) : (
-                        "Xem chi tiết"
-                      )
-                    }
-                    onClick={() =>
-                      handleDetailProduct(item.attributes.name, item.id)
-                    }
-                    disabled={loadingStates[item.id]}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    width={100}
+                    align="center"
+                  >
+                    {page * rowsPerPage + index + 1}
+                  </TableCell>
+                  <TableCell align="justify">{item.attributes.name}</TableCell>
+                  <TableCell
+                    align="justify"
+                    sx={{
+                      textOverflow: "hidden",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {item.attributes.description}
+                  </TableCell>
+                  <TableCell align="right" width={150}>
+                    <CustomButton
+                      name={
+                        loadingStates[item.id] ? (
+                          <LoadingButton />
+                        ) : (
+                          "Xem chi tiết"
+                        )
+                      }
+                      onClick={() =>
+                        handleDetailProduct(item.attributes.name, item.id)
+                      }
+                      disabled={loadingStates[item.id]}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[4, 6, 10]}
+        component="div"
+        count={data?.data.length ?? 0}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{display:"flex", justifyContent:"center"}}
+        labelRowsPerPage="Số hàng mỗi trang:"
+      />
     </div>
   );
 };

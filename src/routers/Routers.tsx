@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import PageError from "../components/Error/PageError";
 import React, { Suspense } from "react";
-import LoadingData from "../components/Loading/LoadingData";
+import { LoadingData, PageError } from "../components";
 
 const HomePage = React.lazy(() => import("../pages/HomePage"));
 const DetailsDog = React.lazy(() => import("../pages/DetailsDog"))

@@ -11,7 +11,7 @@ export interface IPageError {
     | "CUSTOM_ERROR";
 }
 
-const PageError = (props: IPageError) => {
+export const PageError = (props: IPageError) => {
   const { status } = props;
   return (
     <Box
@@ -42,5 +42,3 @@ const PageError = (props: IPageError) => {
     </Box>
   );
 };
-
-export default PageError;
