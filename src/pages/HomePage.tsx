@@ -27,7 +27,7 @@ import {
 const HomePage = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
-  const { data, isLoading, error } = useGetDogsQuery();
+  const { data, error } = useGetDogsQuery();
   const [loadingStates, setLoadingStates] = useState<{
     [key: string]: boolean;
   }>({});
@@ -35,7 +35,6 @@ const HomePage = () => {
   // if (isLoading) {
   //   return <LoadingData />;
   // }
-  console.log(data);
 
   if (error) {
     if (isFetchBaseQueryError(error)) {
@@ -63,7 +62,7 @@ const HomePage = () => {
   // so phan tu tren 1 trang
   const [rowsPerPage, setRowsPerPage] = useState(4);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 

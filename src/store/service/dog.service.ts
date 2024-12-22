@@ -32,14 +32,6 @@ interface Link {
 type DogResponse = { data: Dog[], link: Link };
 type DetailDogResponse = { data: Dog, link: Link };
 
-interface ListResponse<T> {
-    page: number
-    per_page: number
-    total: number
-    total_pages: number
-    data: T[]
-}
-
 
 export const dogApi = createApi({
     reducerPath: "dogApi",
