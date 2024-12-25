@@ -36,7 +36,7 @@ type DetailDogResponse = { data: Dog, link: Link };
 export const dogApi = createApi({
     reducerPath: "dogApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://dogapi.dog/api/v2",
+        baseUrl: import.meta.env.VITE_API_BASE_URL,
         prepareHeaders(headers,) {
             headers.set("Content-Type", "application/json")
             return headers;

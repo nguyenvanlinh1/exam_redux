@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import {
   CustomButton,
   LoadingButton,
+  LoadingData,
   LoadingPage,
   PageError,
 } from "../components";
@@ -40,7 +41,7 @@ import {
 const HomePage = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(DEFAULT_PROGRESS);
-  const { data, error } = useGetDogsQuery();
+  const { data, isLoading, error } = useGetDogsQuery();
   const [loadingStates, setLoadingStates] = useState<{
     [key: string]: boolean;
   }>({});

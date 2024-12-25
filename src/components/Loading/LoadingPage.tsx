@@ -1,22 +1,20 @@
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from "react-top-loading-bar";
 
 interface ILoadingPage {
   progress: number;
-  setProgress: (() => void) | undefined
-  delay?: number
+  setProgress: (() => void) | undefined;
+  delay?: number;
 }
 
-export const LoadingPage = ({progress, delay, setProgress} : ILoadingPage) => {
+export const LoadingPage = ({ progress, delay, setProgress }: ILoadingPage) => {
   return (
-    <div>
-      <LoadingBar
-        color="#FFA21A"
-        height={5}
-        progress={progress}
-        loaderSpeed={delay}
-        onLoaderFinished={setProgress}
-        transitionTime={delay}
-      />
-    </div>
+    <LoadingBar
+      color="#FFA21A"
+      height={5}
+      progress={progress}
+      loaderSpeed={delay}
+      onLoaderFinished={setProgress}
+      transitionTime={delay}
+    />
   );
 };

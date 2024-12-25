@@ -25,7 +25,7 @@ const DetailsDog = () => {
     }
   }
   return (
-    <div>
+    <>
       <Grid2 container paddingX={20} paddingTop={5} spacing={2}>
         <CustomText name="Name" info={data?.data?.attributes?.name}/>
         <CustomText name="Description" info={data?.data?.attributes?.description}/>
@@ -37,7 +37,7 @@ const DetailsDog = () => {
         <CustomText name="Life ( Min )" info={data?.data?.attributes?.life.min}/>
         <CustomText name="Life ( Max )" info={data?.data?.attributes?.life.max}/>
       </Grid2>
-    </div>
+    </>
   );
 };
 
