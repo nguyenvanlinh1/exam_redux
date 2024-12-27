@@ -1,13 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import HTTP_CODE from "../../utils/httpCode";
+import HTTP_CODE_STRING from "../../utils/httpCodeString";
 
-export interface IPageError {
-  status?: number;
-}
+export const PageErrorRedirect = () => {
+  const { status } = useParams();
 
-export const PageError = (props: IPageError) => {
-  const { status } = props;
   return (
     <Box
       display="flex"
@@ -18,10 +16,13 @@ export const PageError = (props: IPageError) => {
       bgcolor="#f5f5f5"
     >
       <Typography variant="h3" color="red" gutterBottom>
-        {status}
+        {status || "Unknown Error"}
       </Typography>
       <Typography variant="h5" color="black">
-        {HTTP_CODE[status as keyof typeof HTTP_CODE]}
+        {HTTP_CODE_STRING[status as keyof typeof HTTP_CODE_STRING]}
+      </Typography>
+      <Typography variant="h5" color="black">
+        {HTTP_CODE[parseInt(status || "") as keyof typeof HTTP_CODE]}
       </Typography>
       <Button
         variant="contained"

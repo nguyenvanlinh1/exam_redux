@@ -40,8 +40,6 @@ const HTTP_CODE = {
     509: 'Bandwidth limit exceeded. ',
     510: 'Cannot extend. ',
     511: 'Need to authenticate to the network. ',
-    "FETCH_ERROR": 'Lost internet connection',
-    "PARSING_ERROR": 'Unable to parse API response. Please check the response format or responseHandler function'
 };
 
 export default HTTP_CODE;

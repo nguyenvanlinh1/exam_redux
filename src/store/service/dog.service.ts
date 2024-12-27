@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface Dog {
+export interface Dog {
     id: string,
     type: string
     attributes: {
@@ -29,8 +29,8 @@ interface Link {
     self: string
 }
 
-type DogResponse = { data: Dog[], link: Link };
-type DetailDogResponse = { data: Dog, link: Link };
+export type DogResponse = { data: Dog[], link: Link };
+export type DetailDogResponse = { data: Dog, link: Link };
 
 
 export const dogApi = createApi({
@@ -55,7 +55,10 @@ export const dogApi = createApi({
             query: (id) => ({ url: `/breeds/${id}` }),
             providesTags: (_result, _error, id) => [{ type: "Dog", id: id }]
         }),
+        getDogPage: build.query<DogResponse, number>({
+            query: (page) => ({ url: `/breeds?page[number]=${page}` }),
+        }),
     })
 })
 
-export const { useGetDogsQuery, useGetDogQuery } = dogApi
+export const { useGetDogsQuery, useGetDogQuery, useGetDogPageQuery } = dogApi

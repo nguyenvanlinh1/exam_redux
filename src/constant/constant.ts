@@ -8,7 +8,7 @@ export const TIME_TO_MID = 1000;
 export const TIME_TO_COMPLETE = 1500;
 
 // pagination
-export const DEFAULT_PAGE = 0
+export const DEFAULT_PAGE = 1
 export const ROW_PER_PAGE_START = 4
 export const ROW_PER_PAGE_MID = 6
 export const ROW_PER_PAGE_END = 10
